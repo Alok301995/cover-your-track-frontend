@@ -1,32 +1,39 @@
-import React ,{useState} from "react";
+import React ,{useState , useEffect} from "react";
 
 
 // function to detect the device acceleration
 function detectAcceleration(callback){
     if(window.DeviceMotionEvent){
         window.addEventListener('devicemotion', function(event){
-            var x = event.accelerationIncludingGravity.x;
-            var y = event.accelerationIncludingGravity.y;
-            var z = event.accelerationIncludingGravity.z;
-            var acceleration = Math.sqrt(x*x+y*y+z*z);
-            if(acceleration > 1){
-                callback(acceleration);
-            }
+            let x = event.accelerationIncludingGravity.x;
+            let y = event.accelerationIncludingGravity.y;
+            let z = event.accelerationIncludingGravity.z;
+            callback({x:x, y:y , z:z});
         });
     }
 }
 
+// function to track mouse coordinates
+// function trackMouse(callback){
+//     if(window.DeviceMotionEvent){
+//         window.addEventListener('mousemove', function(event){
+//             callback({x:event.screenX, y:event.screenY});
+
+//         });
+//     }
+// }
+
 function Home(){
-    const [accelometer, setAccelometer] = useState(0);
+    const [acceleration, setAcceleration] = useState({x:0, y:0 , z:0});
+    useEffect(() => {
+        detectAcceleration(setAcceleration);
+    } ,[acceleration]);
     return(
         <div className="home__container">
             <div className="accelometer">
-                <p>{accelometer}</p>
-                {/* <button onClick={(event) => {
-                    event.preventDefault();
-                    detectAcceleration(setAccelometer);
-                }}>Start</button> */}
-                {detectAcceleration(setAccelometer)}
+                <p>X: {acceleration.x}</p>
+                <p>Y: {acceleration.y}</p>
+                <p>Z: {acceleration.z}</p>
             </div>
         </div>
     )
