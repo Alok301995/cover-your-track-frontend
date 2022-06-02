@@ -36,15 +36,22 @@ function trackMouse(callback){
     }
 }
 
+
+// function to detect the magnetometer
+
+
+
 function Home(){
     const [accStatus , setAccStatus] = useState(false);
     // const [gyroStatus , setGyroStatus] = useState(false);
     const [mouse , setMouse] = useState({x:0, y:0});
     const [isTouch , setIsTouch] = useState(false);
+    const [magReading , setMagReading] = useState({x:0, y:0, z:0});
     useEffect(() => {
         detectAcceleration(setAccStatus);
         trackMouse(setMouse);
         detectTouchSupport(setIsTouch);
+        readMagnometer(setMagReading);
     } ,[]);
     return(
         <div className="home__container">
