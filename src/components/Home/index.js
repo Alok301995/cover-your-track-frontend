@@ -16,27 +16,32 @@ function detectAcceleration(callback){
     }
 }
 
-// function to track mouse coordinates
-// function trackMouse(callback){
-//     if(window.DeviceMotionEvent){
-//         window.addEventListener('mousemove', function(event){
-//             callback({x:event.screenX, y:event.screenY});
 
-//         });
-//     }
-// }
+function trackMouse(callback){
+    if(window.DeviceMotionEvent){
+        window.addEventListener('mousemove', function(event){
+            callback({x:event.screenX, y:event.screenY});
+
+        });
+    }
+}
 
 function Home(){
     const [accStatus , setAccStatus] = useState(false);
     // const [gyroStatus , setGyroStatus] = useState(false);
+    const [mouse , setMouse] = useState({x:0, y:0});
     useEffect(() => {
         detectAcceleration(setAccStatus);
+        trackMouse(setMouse);
     } ,[]);
     return(
         <div className="home__container">
             <div className="accelometer">
                 {accStatus ? <p>Accelerometer is on</p> : <p>Accelerometer is off</p>}
                 {/* {gyroStatus ? <p>Gyroscope is on</p> : <p>Gyroscope is off</p>} */}
+            </div>
+            <div>
+                <p>Mouse position: {mouse.x} , {mouse.y}</p>
             </div>
         </div>
     )
