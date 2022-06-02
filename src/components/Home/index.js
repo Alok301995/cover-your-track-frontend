@@ -5,9 +5,9 @@ import React ,{useState , useEffect} from "react";
 function detectAcceleration(callback){
     if(window.DeviceMotionEvent){
         window.addEventListener('devicemotion', function(event){
-            let x = event.accelerationIncludingGravity.x;
-            let y = event.accelerationIncludingGravity.y;
-            let z = event.accelerationIncludingGravity.z;
+            let x = event.acceleration.x;
+            let y = event.acceleration.y;
+            let z = event.acceleration.z;
             callback({x:x, y:y , z:z});
         });
     }
