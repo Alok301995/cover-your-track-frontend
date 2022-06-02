@@ -9,7 +9,7 @@ function detectAcceleration(callback){
             var y = event.accelerationIncludingGravity.y;
             var z = event.accelerationIncludingGravity.z;
             var acceleration = Math.sqrt(x*x+y*y+z*z);
-            if(acceleration > 10){
+            if(acceleration > 1){
                 callback(acceleration);
             }
         });
@@ -22,10 +22,11 @@ function Home(){
         <div className="home__container">
             <div className="accelometer">
                 <p>{accelometer}</p>
-                <button onClick={(event) => {
+                {/* <button onClick={(event) => {
                     event.preventDefault();
                     detectAcceleration(setAccelometer);
-                }}>Start</button>
+                }}>Start</button> */}
+                {detectAcceleration(setAccelometer)}
             </div>
         </div>
     )
