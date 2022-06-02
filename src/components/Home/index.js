@@ -5,11 +5,14 @@ import React ,{useState , useEffect} from "react";
 function detectAcceleration(callback){
     if(window.DeviceMotionEvent){
         window.addEventListener('devicemotion', function(event){
-            let x = event.acceleration.x;
-            let y = event.acceleration.y;
-            let z = event.acceleration.z;
-            callback({x:x, y:y , z:z});
+            if(event.accelerationIncludingGravity.x || event.accelerationIncludingGravity.y || event.accelerationIncludingGravity.z){
+                callback(true);
+            }
+            
         });
+    }
+    else{
+        callback(false);
     }
 }
 
@@ -24,16 +27,16 @@ function detectAcceleration(callback){
 // }
 
 function Home(){
-    const [acceleration, setAcceleration] = useState({x:0, y:0 , z:0});
+    const [accStatus , setAccStatus] = useState(false);
+    // const [gyroStatus , setGyroStatus] = useState(false);
     useEffect(() => {
-        detectAcceleration(setAcceleration);
-    } ,[acceleration]);
+        detectAcceleration(setAccStatus);
+    } ,[]);
     return(
         <div className="home__container">
             <div className="accelometer">
-                <p>X: {acceleration.x}</p>
-                <p>Y: {acceleration.y}</p>
-                <p>Z: {acceleration.z}</p>
+                {accStatus ? <p>Accelerometer is on</p> : <p>Accelerometer is off</p>}
+                {/* {gyroStatus ? <p>Gyroscope is on</p> : <p>Gyroscope is off</p>} */}
             </div>
         </div>
     )
