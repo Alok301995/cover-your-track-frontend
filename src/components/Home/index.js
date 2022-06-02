@@ -15,6 +15,16 @@ function detectAcceleration(callback){
         callback(false);
     }
 }
+// function to check touch support
+function detectTouchSupport(callback){
+    if(window.TouchEvent){
+        callback(true);
+    }
+    else{
+        callback(false);
+    }
+}
+
 
 
 function trackMouse(callback){
@@ -30,6 +40,7 @@ function Home(){
     const [accStatus , setAccStatus] = useState(false);
     // const [gyroStatus , setGyroStatus] = useState(false);
     const [mouse , setMouse] = useState({x:0, y:0});
+    const [isTouch , setIsTouch] = useState(false);
     useEffect(() => {
         detectAcceleration(setAccStatus);
         trackMouse(setMouse);
@@ -42,6 +53,9 @@ function Home(){
             </div>
             <div>
                 <p>Mouse position: {mouse.x} , {mouse.y}</p>
+            </div>
+            <div>
+                {isTouch ? <p>Touch is supported</p> : <p>Touch is not supported</p>}
             </div>
         </div>
     )
