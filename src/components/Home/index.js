@@ -44,6 +44,7 @@ function Home(){
     useEffect(() => {
         detectAcceleration(setAccStatus);
         trackMouse(setMouse);
+        detectTouchSupport(setIsTouch);
     } ,[]);
     return(
         <div className="home__container">
