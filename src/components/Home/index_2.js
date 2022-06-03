@@ -5,33 +5,26 @@ import {useEffect ,useState} from 'react';
 
 const Test = () => {
     const [accData, setAccData] = useState({x:0, y:0, z:0});
-    const [gyro , setGyro] = useState(false);
     function handler(event){
-        if(window.DeviceOrientationEvent){
-            setGyro(true);
-            window.addEventListener('deviceorientation', function(event){
-                setAccData({x:event.gamma, y:event.beta, z:event.alpha});
-            });
-        }
+        let x = event.accelerationIncludingGravity.x;
+        let y = event.accelerationIncludingGravity.y;
+        let z = event.accelerationIncludingGravity.z;
+
+        console.log(x,y,z);
+        setAccData({x:x,y:y,z:x});
     }
     useEffect(() => {
         // ask for permission to use the accelerometer
-        async function getPermission(){
-            const response = await DeviceOrientationEvent.requestPermission();
-            if(response === 'granted'){
-                handler();
-            }
-            
+        if(window.DeviceMotionEvent){
+            window.addEventListener('devicemotion', handler ,false);
         }
-        getPermission();
         return () => {
-            window.removeEventListener('deviceorientation',handler);
+            window.removeEventListener('devicemotion', handler);
         }
-    } )
+    } );
     
     return (
     <div>
-        <h1>Gyro supported : {gyro ? "Yes" :"No" }</h1>
         <h1>x: {accData.x}</h1>
         <h1>y: {accData.y}</h1>
         <h1>z: {accData.z}</h1>
