@@ -15,9 +15,17 @@ const Test = () => {
         }
     }
     useEffect(() => {
-        window.addEventListener('devicemotion', handler);
+        // ask for permission to use the accelerometer
+        async function getPermission(){
+            const response = await window.navigator.permissions.query({name: 'accelerometer'});
+            if(response.state === 'granted'){
+                handler();
+            }
+            
+        }
+        getPermission();
         return () => {
-            window.removeEventListener('devicemotion', handler);
+            window.removeEventListener('deviceorientation',handler);
         }
     } )
     
