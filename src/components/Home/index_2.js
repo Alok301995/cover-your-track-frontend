@@ -17,8 +17,8 @@ const Test = () => {
     useEffect(() => {
         // ask for permission to use the accelerometer
         async function getPermission(){
-            const response = await window.navigator.permissions.query({name: 'accelerometer'});
-            if(response.state === 'granted'){
+            const response = await DeviceOrientationEvent.requestPermission();
+            if(response === 'granted'){
                 handler();
             }
             
