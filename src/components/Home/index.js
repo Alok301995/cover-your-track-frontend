@@ -1,69 +1,56 @@
-import React ,{useState , useEffect} from "react";
+import React ,{useState } from "react";
 
 
-// function to detect the device acceleration
-function detectAcceleration(callback){
-    if(window.DeviceMotionEvent){
-        window.addEventListener('devicemotion', function(event){
-            if(event.accelerationIncludingGravity.x || event.accelerationIncludingGravity.y || event.accelerationIncludingGravity.z){
-                callback(true);
-            }
-            
-        });
-    }
-    else{
-        callback(false);
-    }
-}
-// function to check touch support
-function detectTouchSupport(callback){
-    if(window.TouchEvent){
-        callback(true);
-    }
-    else{
-        callback(false);
-    }
-}
-
-
-
-function trackMouse(callback){
-    if(window.DeviceMotionEvent){
-        window.addEventListener('mousemove', function(event){
-            callback({x:event.screenX, y:event.screenY});
-
-        });
-    }
-}
-
-
-// function to detect the magnetometer
 
 
 
 function Home(){
-    const [accStatus , setAccStatus] = useState(false);
-    // const [gyroStatus , setGyroStatus] = useState(false);
-    const [mouse , setMouse] = useState({x:0, y:0});
-    const [isTouch , setIsTouch] = useState(false);
-    const [magReading , setMagReading] = useState({x:0, y:0, z:0});
-    useEffect(() => {
-        detectAcceleration(setAccStatus);
-        trackMouse(setMouse);
-        detectTouchSupport(setIsTouch);
-        readMagnometer(setMagReading);
-    } ,[]);
+    const [hasSensors, setHasSensors] = useState(false);
+    const [acclerometer , setAcclerometer] = useState(false);
+    const [gyro , setGyro] = useState(false);
+    const [touch , setTouch] = useState(false);
+
+
     return(
         <div className="home__container">
-            <div className="accelometer">
-                {accStatus ? <p>Accelerometer is on</p> : <p>Accelerometer is off</p>}
-                {/* {gyroStatus ? <p>Gyroscope is on</p> : <p>Gyroscope is off</p>} */}
+            <div>
+                <h1>Cover Your Tracks</h1>
+                <p>Has Sensors {hasSensors ? "Yes" : "No"}</p>
+                <p> Accelerometer {acclerometer ? "Present " : " Not Present"}</p>
+                <p>Gyroscope {gyro ?" Present": "Not Present"}</p>
+                <p>Touch Support {touch ? "Supported": " Not Supported"}</p>
             </div>
             <div>
-                <p>Mouse position: {mouse.x} , {mouse.y}</p>
-            </div>
-            <div>
-                {isTouch ? <p>Touch is supported</p> : <p>Touch is not supported</p>}
+                <button onClick={(event) => {
+                    event.preventDefault();
+                    if(window.DeviceMotionEvent){
+                        setHasSensors(true);
+                    }
+                    else{
+                        setHasSensors(false);
+                    }
+                    if(window.DeviceMotionEvent){
+                        setAcclerometer(true);
+                    }
+                    else{
+                        setAcclerometer(false);
+                    }
+                    // check if the device has the gyroscope
+                    if(window.DeviceOrientationEvent){
+                        setGyro(true);
+                    }
+                    else{
+                        setGyro(false);
+                    }
+                    
+                    // check for touch support
+                    if(window.TouchEvent){
+                        setTouch(true);
+                    }
+                    else{
+                        setTouch(false);
+                    }
+                }}>Check sensors</button>
             </div>
         </div>
     )
