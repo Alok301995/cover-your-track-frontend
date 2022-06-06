@@ -24,10 +24,10 @@ function Home(){
                 <h1>Cover Your Tracks</h1>
                 <p>Has Sensors {hasSensors ? "Yes" : "No"}</p>
                 <p>Touch Support {touch ? "Supported": " Not Supported"}</p>
-                <div>
+                {/* <div>
                     <p>Accelorometer Reading</p>
                     <Acc/>
-                </div>
+                </div> */}
                 <p>Browser Name : {parser(navigator.userAgent).browser.name}</p>
                 <p>Browser version : {parser(navigator.userAgent).browser.version}</p>
                 <p>OS Name : {parser(navigator.userAgent).os.name}</p>
