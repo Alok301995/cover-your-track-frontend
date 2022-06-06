@@ -1,17 +1,25 @@
+import React,{Component} from 'react';
 
-const List = (props) => {
-    return (  
-        <div>
-            <p>Is it landscape:{props.state.landscape.toString()} </p>
-            <p>x:{props.state.x}</p>
-            <p>y:{props.state.y}</p>
-            <p>z:{props.state.z}</p>
-            <p>rotation alpha:{props.state.rotation.alpha}</p>
-            <p>rotation beta:{props.state.rotation.beta}</p>
-            <p>rotation gamma:{props.state.rotation.gamma}</p>
-        </div>
-            
-    );
+class List extends Component {
+    constructor(props) {
+        super(props)
+    }
+    render(){
+        console.log(this.props)
+        return(
+            <div>
+                <ul>
+                <li>Is it landscape:{this.props.state.landscape.toString()} </li>
+                <li>x:{this.props.state.x}</li>
+                <li>y:{this.props.state.y}</li>
+                <li>z:{this.props.state.z}</li>
+                <li>rotation alpha:{this.props.state.rotation.alpha}</li>
+                <li>rotation beta:{this.props.state.rotation.beta}</li>
+                <li>rotation gamma:{this.props.state.rotation.gamma}</li>
+                </ul>
+            </div>
+        )
+    }
 }
- 
+
 export default List;
