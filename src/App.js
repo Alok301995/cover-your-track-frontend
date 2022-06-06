@@ -24,9 +24,9 @@ class App extends Component {
     return (
       <div className="App">
         <Home/>
-        <ReactAccelorometerValue>
+        {/* <ReactAccelorometerValue>
           <List></List>
-        </ReactAccelorometerValue>
+        </ReactAccelorometerValue> */}
       </div>
     );
   }
