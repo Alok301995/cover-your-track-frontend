@@ -13,12 +13,9 @@ const AcclerometerReading = () => {
 }
 
 const List =(props) => {
-    console.log(props.state.x);
     return (
         <div>
-            <p>X : {props.state.x}</p>
-            <p>Y : {props.state.y}</p>
-            <p>Z : {props.state.z}</p>
+            <p>Values : {props.state.x}</p>
         </div>
     );
 }
