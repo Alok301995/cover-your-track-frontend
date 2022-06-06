@@ -10,39 +10,15 @@ function Home(){
     return(
         <div className="home__container">
             <div>
-                <h1>Cover Your Tracks</h1>
-                <p>Has Sensors {hasSensors ? "Yes" : "No"}</p>
-                <p>Touch Support {touch ? "Supported": " Not Supported"}</p>
+                <h1>Attributes</h1>
+                <p>Has Sensors : {window.DeviceMotionEvent ? "Yes" : "No"}</p>
+                <p>Touch Support : {window.TouchEvent ? "Supported": " Not Supported"}</p>
                 <p>Browser Name : {parser(navigator.userAgent).browser.name}</p>
                 <p>Browser version : {parser(navigator.userAgent).browser.version}</p>
                 <p>OS Name : {parser(navigator.userAgent).os.name}</p>
                 <p>OS version : {parser(navigator.userAgent).os.version}</p>
                 <p>Device model : {parser(navigator.userAgent).device.model}</p>
-                <p>Device type : {parser(navigator.userAgent).device.type }</p>
-                
-                
-
-                
-            </div>
-            <div>
-                <button onClick={(event) => {
-                    event.preventDefault();
-                    if(window.DeviceMotionEvent){
-                        setHasSensors(true);
-                    }
-                    else{
-                        setHasSensors(false);
-                    }
-                    // check if the device has the gyroscope
-                    
-                    // check for touch support
-                    if(window.TouchEvent){
-                        setTouch(true);
-                    }
-                    else{
-                        setTouch(false);
-                    }
-                }}>Check sensors</button>
+                <p>Device type : {parser(navigator.userAgent).device.type }</p>   
             </div>
         </div>
     )

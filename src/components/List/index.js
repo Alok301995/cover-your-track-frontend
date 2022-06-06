@@ -2,16 +2,15 @@
 const List = (props) => {
     return (  
         <div>
-            <ul>
-            <li>Is it landscape:{props.state.landscape.toString()} </li>
-            <li>x:{props.state.x}</li>
-            <li>y:{props.state.y}</li>
-            <li>z:{props.state.z}</li>
-            <li>rotation alpha:{props.state.rotation.alpha}</li>
-            <li>rotation beta:{props.state.rotation.beta}</li>
-            <li>rotation gamma:{props.state.rotation.gamma}</li>
-            </ul>
-            </div>
+            <p>Is it landscape:{props.state.landscape.toString()} </p>
+            <p>x:{props.state.x}</p>
+            <p>y:{props.state.y}</p>
+            <p>z:{props.state.z}</p>
+            <p>rotation alpha:{props.state.rotation.alpha}</p>
+            <p>rotation beta:{props.state.rotation.beta}</p>
+            <p>rotation gamma:{props.state.rotation.gamma}</p>
+        </div>
+            
     );
 }
  
