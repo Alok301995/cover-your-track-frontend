@@ -1,24 +1,31 @@
 import React ,{useState } from "react";
-
-
-
+import parser from "ua-parser-js";
+import Acc from "../Accelorometer/index";
 
 
 function Home(){
     const [hasSensors, setHasSensors] = useState(false);
-    const [acclerometer , setAcclerometer] = useState(false);
-    const [gyro , setGyro] = useState(false);
     const [touch , setTouch] = useState(false);
-
-
     return(
         <div className="home__container">
             <div>
                 <h1>Cover Your Tracks</h1>
                 <p>Has Sensors {hasSensors ? "Yes" : "No"}</p>
-                <p> Accelerometer {acclerometer ? "Present " : " Not Present"}</p>
-                <p>Gyroscope {gyro ?" Present": "Not Present"}</p>
                 <p>Touch Support {touch ? "Supported": " Not Supported"}</p>
+                <div>
+                    <p>Accelorometer Reading</p>
+                    <Acc/>
+                </div>
+                <p>Browser Name : {parser(navigator.userAgent).browser.name}</p>
+                <p>Browser version : {parser(navigator.userAgent).browser.version}</p>
+                <p>OS Name : {parser(navigator.userAgent).os.name}</p>
+                <p>OS version : {parser(navigator.userAgent).os.version}</p>
+                <p>Device model : {parser(navigator.userAgent).device.model}</p>
+                <p>Device type : {parser(navigator.userAgent).device.type}</p>
+                
+                
+
+                
             </div>
             <div>
                 <button onClick={(event) => {
@@ -29,19 +36,7 @@ function Home(){
                     else{
                         setHasSensors(false);
                     }
-                    if(window.DeviceMotionEvent){
-                        setAcclerometer(true);
-                    }
-                    else{
-                        setAcclerometer(false);
-                    }
                     // check if the device has the gyroscope
-                    if(window.DeviceOrientationEvent){
-                        setGyro(true);
-                    }
-                    else{
-                        setGyro(false);
-                    }
                     
                     // check for touch support
                     if(window.TouchEvent){
